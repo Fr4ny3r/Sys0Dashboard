@@ -1,0 +1,26 @@
+#root {
+  height: 100dvh;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  background-color: var(--color-background); /* Fondo claro para el área de contenido */
+  color: var(--color-text-main);
+}
+
+.sidebar { /* El área amarilla de la izquierda */
+  background-color: var(--color-sidebar-bg);
+  /* El ancho dependerá de tu layout, p.ej: width: 200px; */
+}
+
+.main-content { /* El área roja de la derecha */
+  background-color: var(--color-background); /* Usamos el color de fondo claro */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+}

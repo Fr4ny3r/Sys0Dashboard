@@ -10,9 +10,9 @@ function App() {
   return (
     <div className="w-screen h-screen overflow-hidden">
       {/*<Nav />*/}
-      <div className="w-full h-full">
+      <div className="w-full h-full flex bg-[var(--color-sidebar-bg)] justify-center items-center">
         <Aside sectionList={sectionList} sect={sect} setSect={setSect}/>        
-        <SectionBox sect={sect}/>
+        <SectionBox sectionList={sectionList} sect={sect}/>
       </div>
     </div>
   )

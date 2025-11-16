@@ -8,6 +8,7 @@
   align-items: center;
 }
 body {
+  overflow: hidden;
   background-color: var(--color-background); /* Fondo claro para el área de contenido */
   color: var(--color-text-main);
 }
@@ -20,6 +21,13 @@ body {
 .main-content { /* El área roja de la derecha */
   background-color: var(--color-background); /* Usamos el color de fondo claro */
 }
+
+#sectList:hover > span > svg {
+  scale: 2.1;
+  opacity: 9%;
+  transition: all 0.4s 0s;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
 

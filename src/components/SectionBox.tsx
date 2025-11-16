@@ -1,8 +1,11 @@
+import Home from './Home'
 
-function SectionBox() {
+function SectionBox( { sectionList, sect } : {sectionList: string[], sect : string}) {
 
   return (
-    <section className="bg-blue-500/80 w-full h-1/12 overflow-hidden">
+    <section className=" w-full translate-x-1 h-97/100 bg-[var(--color-background)] border-2 border-[var(--color-sidebar-bg)] rounded-l-2xl overflow-hidden">
+      {sect == sectionList[0] ? <Home /> : <></>}
+      {sect == sectionList[1] ? <></> : <></>}
     </section>
   )
 }

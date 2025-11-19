@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './components/supabase.js'
-import { Egreso } from './components/database.ts'
+import type { Egreso } from './components/database.ts'
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import Nav from './components/Nav'
 import Aside from './components/Aside'
@@ -47,7 +47,7 @@ function App() {
       <BrowserRouter>
       <div className="w-full h-full flex bg-[var(--color-sidebar-bg)] justify-center items-center">
         <Aside sectionList={sectionList} />        
-        <SectionBox sectionList={sectionList} />
+        <SectionBox sectionList={sectionList} egresos={egresos} />
       </div>
       </BrowserRouter>
     </div>

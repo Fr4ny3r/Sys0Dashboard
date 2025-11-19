@@ -29,7 +29,7 @@ export interface Proveedor {
  * 3. Tabla: Egresos (Gastos Operativos)
  */
 export interface Egreso {
-  id: number;
+  id?: number;
   fecha: string; // DATE (usar string o Date, dependiendo de cómo lo manejes en JS)
   monto: number; // NUMERIC(10, 2)
   tipo: string; // Ej: 'Alquiler', 'Nómina'

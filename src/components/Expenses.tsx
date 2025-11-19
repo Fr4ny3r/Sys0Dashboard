@@ -1,7 +1,8 @@
 import type { Egreso } from './database.ts'
 
 
-function Expenses( { sectionList, egresos } : {sectionList: string[], egresos: Egreso[]}) {
+function Expenses( { sectionList, egresos, obtenerEgresos, agregarEgresos } : {sectionList: string[], egresos: Egreso[], obtenerEgresos: () => Promise<void>, agregarEgresos : (nuevoEgreso : Egreso )=> void }) {
+    obtenerEgresos()
     return (
     <main className="relative w-full p-8 h-full overflow-hidden">
         <span className="bg-[var(--color-primary)]/50 rounded-xl w-full h-20 flex px-9 text-3xl font-bold items-center block">
@@ -16,8 +17,26 @@ function Expenses( { sectionList, egresos } : {sectionList: string[], egresos: E
             </li>
         </ul>
         <ul className="mt-6 space-y-4 overflow-y-auto text-left pt-4 flex flex-col">
-        <div className='flex justify-around items-center w-[8rem] bg-white/10 border-[var(--color-border)] border-[0.1rem] p-2 px-3 text-lg rounded-xl hover:cursor-pointer select-none'><span className='font-bold text-2xl'>+</span> agregar</div>
-            {egresos && egresos.map((egreso) => (
+        <div
+            className='flex justify-around items-center w-[8rem] bg-white/10 border-[var(--color-border)] border-[0.1rem] p-2 px-3 text-lg rounded-xl hover:cursor-pointer select-none'
+        
+            onClick={async () => {
+                const nuevoEgreso: Egreso = {
+                    id: 0, 
+                    descripcion: 'Nuevo Egreso',
+                    monto: 440,
+                    tipo: 'general',
+                    fecha: new Date().toISOString(),
+                };
+                await agregarEgresos(nuevoEgreso);
+                obtenerEgresos()
+            }}
+        >
+            <span className='font-bold text-2xl'>+</span>
+            agregar
+        
+        </div>
+            {egresos.length != 0 ? egresos.map((egreso) => (
             <li key={egreso.id} className='bg-white/10 p-3 rounded-lg border-[var(--color-border)] border-[0.1rem] grid grid-cols-[30rem_5rem_8rem_auto_10rem] gap-4'>
                 <p className=' border-r-[var(--color-border)] border-r-[0.1rem] block'>{egreso.descripcion}</p>
                 <span className='border-r-[var(--color-border)] border-r-[0.1rem] block '>${egreso.monto}</span>
@@ -34,7 +53,7 @@ function Expenses( { sectionList, egresos } : {sectionList: string[], egresos: E
                 </span>
                 
             </li>
-            ))}
+            )) : (<p className='text-center mt-10 text-2xl font-semibold'>No hay egresos registrados.</p>)}
         </ul>
     </main>
     )

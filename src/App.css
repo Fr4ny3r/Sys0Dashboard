@@ -13,6 +13,16 @@ body {
   color: var(--color-text-main);
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Necesario para ocultar los botones completamente en algunos navegadores */
+}
+
+/* 2. Para Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 .sidebar { /* El área amarilla de la izquierda */
   background-color: var(--color-sidebar-bg);
   /* El ancho dependerá de tu layout, p.ej: width: 200px; */

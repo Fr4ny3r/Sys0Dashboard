@@ -94,7 +94,8 @@ function Expenses( { sectionList, obtenerEgresos, agregarDatos, borrarDatos } : 
                 <span className='border-r-[var(--color-border)] border-r-[0.1rem] block px-5'>Fecha</span>
             </li>
         </ul>
-        <div className='w-full flex justify-between items-center h-[3.5rem] mt-6'>
+        <div className='flex items-center h-[3.5rem] mt-6'>
+        {!aggEgereso &&
         <div
             className='flex justify-around items-center w-[8rem] bg-white/10 border-[var(--color-border)] border-[0.1rem] p-2 px-3 text-lg rounded-xl hover:cursor-pointer select-none'
             onClick={() => setAggEgreso(true)}
@@ -113,14 +114,15 @@ function Expenses( { sectionList, obtenerEgresos, agregarDatos, borrarDatos } : 
             <span className='font-bold text-2xl'>+</span>
             agregar
         
-        </div>
-        <span>id</span>
+        </div>}
         {aggEgereso &&
-         <div className='bg-white/10  p-3 rounded-lg border-[var(--color-border)] border-[0.1rem] grid grid-cols-[30rem_5rem_8rem_auto_10rem] gap-4'>
-                <input placeholder='Agrega un registro' type='text' className='outline-none border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block' />
-                <span className='border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block '>$100</span>
-                <span className=' border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block px-4'>general</span>
-                <span className=' border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block pr-5'>{new Date().toLocaleDateString()}</span>
+        <div className='w-full flex items-center gap-4'>
+        <span className='text-right px-4 text-xl font-bold'>Agregar Registro :</span>
+        <div className='relative bg-white/10 p-3 rounded-lg border-[var(--color-border)] border-[0.1rem] grid grid-cols-[20rem_5rem_8rem_auto_10rem] gap-4'>
+                <input placeholder='Descripción' type='text' className='w-full outline-none border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block' />
+                <input placeholder='Monto' type='number' className='outline-none border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block '/>
+                <input placeholder='Tipo' className='outline-none border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block px-4' />
+                <input placeholder='Fecha' type='date' className=' border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block pr-5' />
                 <span className=' flex justify-center items-center gap-4 pr-4'>
                     {/* Placeholder for future actions, e.g., edit/delete */}
                     <a className='hover:text-green-200 cursor-pointer transition-colors duration-150'>
@@ -130,7 +132,9 @@ function Expenses( { sectionList, obtenerEgresos, agregarDatos, borrarDatos } : 
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.9rem" height="1.9rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                     </a>
                 </span>        
-        </div>}
+        </div>
+        </div>
+        }
         </div>
         <ul className="mt-6 space-y-4 overflow-y-auto text-left pt-4 flex flex-col">
             {egresos.length != 0 ? egresos.map((egreso) => (

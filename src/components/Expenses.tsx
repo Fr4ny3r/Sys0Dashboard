@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import FormularioAgregarRegistro from './FormularioAgregarRegistro.tsx';
 import type { Egreso } from './database.ts'
 
 function Expenses( { sectionList, obtenerEgresos, agregarDatos, borrarDatos } : {sectionList: string[], obtenerEgresos: () => void, agregarDatos : (tableName : string, nuevaData : any )=> Promise<void>, borrarDatos : (tableName : string, id : number) => Promise<void>} ) {
@@ -35,19 +36,13 @@ function Expenses( { sectionList, obtenerEgresos, agregarDatos, borrarDatos } : 
       }
     };
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            setBorrar(false);
-        }
-    });
-
     fetchData();
   }, []);
   
     return (
     <main className="w-full p-8 h-full overflow-hidden">
         {borrar && (
-            <div className="absolute top-0 left-0 w-full h-full bg-black/50 backdrop-blur-[5px] flex justify-center items-center z-10 transition-opacity duration-300">
+            <div className="absolute top-0 left-0 w-full h-full bg-black/50 backdrop-blur-[0.5rem] flex justify-center items-center z-10 transition-opacity duration-300">
                 <div className="bg-[var(--color-background)] p-6 rounded-xl border-2 border-[var(--color-border)]">
                     <h2 className="text-2xl font-bold mb-4">¿Estás seguro de que deseas borrar este registro?</h2>
                     <div className="flex justify-end gap-4">
@@ -116,24 +111,7 @@ function Expenses( { sectionList, obtenerEgresos, agregarDatos, borrarDatos } : 
         
         </div>}
         {aggEgereso &&
-        <div className='w-full flex items-center gap-4'>
-        <span className='text-right px-4 text-xl font-bold'>Agregar Registro :</span>
-        <div className='relative bg-white/10 p-3 rounded-lg border-[var(--color-border)] border-[0.1rem] grid grid-cols-[20rem_5rem_8rem_auto_10rem] gap-4'>
-                <input placeholder='Descripción' type='text' className='w-full outline-none border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block' />
-                <input placeholder='Monto' type='number' className='outline-none border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block '/>
-                <input placeholder='Tipo' className='outline-none border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block px-4' />
-                <input placeholder='Fecha' type='date' className=' border-r-[var(--color-border)] flex items-center border-r-[0.1rem] block pr-5' />
-                <span className=' flex justify-center items-center gap-4 pr-4'>
-                    {/* Placeholder for future actions, e.g., edit/delete */}
-                    <a className='hover:text-green-200 cursor-pointer transition-colors duration-150'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.9rem" height="1.9rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
-                    </a>
-                    <a className='hover:text-red-200 cursor-pointer transition-colors duration-150'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.9rem" height="1.9rem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                    </a>
-                </span>        
-        </div>
-        </div>
+        <FormularioAgregarRegistro onClose={() => setAggEgreso(false)} />
         }
         </div>
         <ul className="mt-6 space-y-4 overflow-y-auto text-left pt-4 flex flex-col">

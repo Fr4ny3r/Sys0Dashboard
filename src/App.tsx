@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { Egreso } from './components/database.ts'
 import { BrowserRouter } from 'react-router-dom';
 import Aside from './components/Aside'
 import SectionBox from './components/SectionBox'
@@ -10,9 +9,9 @@ function App() {
 const API_URL = 'https://back0dashboard.guevarafranyer09.workers.dev'; 
 
 
-  const obtenerEgresos = async () => {
+  const obtenerDatos = async (tableName : string) => {
     try {
-      const response = await fetch(`${API_URL}/api/egresos`);
+      const response = await fetch(`${API_URL}/api/${tableName}`);
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
@@ -64,6 +63,25 @@ const API_URL = 'https://back0dashboard.guevarafranyer09.workers.dev';
     }
   }
 
+  const actualizarDatos = async (tableName : string, id : number, datosActualizados : any) => {
+    try {
+      const response = await fetch(`${API_URL}/api/${tableName}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datosActualizados),
+      });
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+      // Actualizar la lista de egresos después de actualizar uno
+    } catch (e : any) {
+      console.error("Error al actualizar egreso:", e);
+      setError(e.message);
+    }
+  }
+
 
 
   
@@ -74,7 +92,7 @@ const API_URL = 'https://back0dashboard.guevarafranyer09.workers.dev';
       <BrowserRouter>
       <div className="w-full h-full flex bg-[var(--color-sidebar-bg)] justify-center items-center">
         <Aside sectionList={sectionList} />        
-        <SectionBox sectionList={sectionList} obtenerEgresos={obtenerEgresos} agregarDatos={agregarDatos} borrarDatos={borrarDatos} />
+        <SectionBox sectionList={sectionList} obtenerDatos={obtenerDatos} agregarDatos={agregarDatos} borrarDatos={borrarDatos} />
       </div>
       </BrowserRouter>
     </div>

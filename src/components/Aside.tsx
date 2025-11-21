@@ -100,7 +100,15 @@ function Aside({ sectionList } : { sectionList : string[] }) {
                 </span>
               </li>
               </Link>
-            ) : (<a>{s[0].toUpperCase() + s.slice(1)}</a>) )))))))} 
+            ) : (
+              <Link to={`/${s}`}>
+              <li key={s} id="sectList" className="relative rounded-sm p-3 mx-1 flex items-center justify-between hover:font-bold hover:bg-[var(--color-primary)]/10 hover:cursor-pointer transition">
+                <span title={s} className=" flex w-full items-center justify-between">
+                <span>{s[0].toUpperCase() + s.slice(1)}</span>
+                </span>
+              </li>
+              </Link>
+            ) )))))))} 
             </>           
         ))) : (<span>Cargando...</span>)} 
         
